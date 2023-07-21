@@ -131,7 +131,6 @@ def botBlaze():
     # Conteúdo da aba "BotBlaze"
     st.write("Conteúdo da aba BotBlaze.")
 
-# Definindo o layout da página com a sidebar e as abas
 def main():
     st.sidebar.title('Menu')
     opcoes = ['Botmail', 'Bozap', 'BotBlaze']
