@@ -1,3 +1,1 @@
-smtplib
-email
-streamlit
+pywhatkit==5.4
