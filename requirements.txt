@@ -1,1 +1,2 @@
 pywhatkit==5.4
+Python 3.11.3
