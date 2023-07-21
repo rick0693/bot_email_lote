@@ -1,6 +1,7 @@
 import streamlit as st
 
-
+# Função para enviar e-mails
+# (mantida do código original)
 
 import smtplib
 from email.mime.text import MIMEText
@@ -9,7 +10,6 @@ from email.mime.base import MIMEBase
 from email import encoders
 import streamlit as st
 import concurrent.futures
-
 
 def enviar_email(destinatario, assunto, corpo, arquivo_anexo=None):
     # Configurações do servidor do Gmail
@@ -89,48 +89,13 @@ def botmail():
             st.warning('Insira um destinatário válido.')
 
 def bozap():
-    st.title("Bozap")
-    st.write("Bem-vindo(a) à aba Bozap!")
-    st.write("Aqui você pode gerar uma mensagem para WhatsApp.")
-    
-    mensagem_gerada = gerar_mensagem_whatsapp()
-
-    st.markdown("**Texto gerado:**")
-    st.text_area("", mensagem_gerada, height=200, max_chars=None, key=None)
-
-    numero_whatsapp = st.text_input("Insira o número de WhatsApp do destinatário (inclua o DDI, ex.: +55):")
-
-    if st.button("Gerar Link para WhatsApp"):
-        mensagem_codificada = quote(mensagem_gerada)
-        link_whatsapp = f"https://wa.me/{numero_whatsapp}?text={mensagem_codificada}"
-        st.markdown(f"**Link para enviar a mensagem:**")
-        st.markdown(f"[{link_whatsapp}]({link_whatsapp})")
-
-# Restante do código (mantido do código original)
-
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-from email import encoders
-import streamlit as st
-import concurrent.futures
-
-# Função para enviar e-mails (mantida do código original)
-# ...
-
-# Função para enviar a quantidade especificada de e-mails para o mesmo destinatário simultaneamente
-# ...
-
-# Definindo as sessões para cada aba
-def botmail():
-    # ...
-
-def bozap():
-    # ...
+    st.title('Bozap')
+    # Conteúdo da aba "Bozap"
+    st.write("Conteúdo da aba Bozap.")
 
 def botBlaze():
-    st.title("BotBlaze")
+    st.title('BotBlaze')
+    # Conteúdo da aba "BotBlaze"
     st.write("Conteúdo da aba BotBlaze.")
 
 # Definindo o layout da página com a sidebar e as abas
