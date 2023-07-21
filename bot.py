@@ -140,4 +140,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-Com essas alterações, a aba "Bozap" agora possui a 
+
