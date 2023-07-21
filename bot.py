@@ -1,4 +1,7 @@
+import streamlit as st
 
+# Função para enviar e-mails
+# (mantida do código original)
 
 import smtplib
 from email.mime.text import MIMEText
@@ -57,8 +60,8 @@ def enviar_emails_em_lote(destinatario, assunto, corpo, arquivo_anexo=None, quan
             futures.append(executor.submit(enviar_email, destinatario, assunto, corpo, arquivo_anexo))
         concurrent.futures.wait(futures)
 
-# Interface do Streamlit
-def main():
+# Definindo as sessões para cada aba
+def botmail():
     st.title('Envio de E-mails em Lote')
 
     # Entrada do destinatário
@@ -84,6 +87,29 @@ def main():
             st.success('E-mails enviados com sucesso!')
         else:
             st.warning('Insira um destinatário válido.')
+
+def bozap():
+    st.title('Bozap')
+    # Conteúdo da aba "Bozap"
+    st.write("Conteúdo da aba Bozap.")
+
+def botBlaze():
+    st.title('BotBlaze')
+    # Conteúdo da aba "BotBlaze"
+    st.write("Conteúdo da aba BotBlaze.")
+
+# Definindo o layout da página com a sidebar e as abas
+def main():
+    st.sidebar.title('Menu')
+    opcoes = ['Botmail', 'Bozap', 'BotBlaze']
+    aba_selecionada = st.sidebar.selectbox('Selecione a aba:', opcoes)
+
+    if aba_selecionada == 'Botmail':
+        botmail()
+    elif aba_selecionada == 'Bozap':
+        bozap()
+    elif aba_selecionada == 'BotBlaze':
+        botBlaze()
 
 if __name__ == '__main__':
     main()
