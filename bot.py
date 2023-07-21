@@ -88,32 +88,15 @@ def botmail():
         else:
             st.warning('Insira um destinatário válido.')
 
-
-def gerar_mensagem_whatsapp():
-    nome_empresa = "Fotus Energia Solar"
-
-    nota_fiscal = st.text_input("Número da Nota Fiscal:")
-    destinatario = st.text_input("Nome do destinatário:")
-    data_agendamento = st.text_input("Data do agendamento:")
-    pedido = st.text_input("Número do pedido:")
-    motorista = st.text_input("Nome do motorista:")
-
-    mensagem_gerada = f"Meu nome é Ricardo, falo da {nome_empresa}.\n"
-    mensagem_gerada += f"Estamos com uma entrega referente à NF {nota_fiscal} do destinatário {destinatario},\n"
-    mensagem_gerada += f"gostaria de agendar a entrega para o dia {data_agendamento}.\n"
-    mensagem_gerada += f"Detalhes do pedido: {pedido}.\n"
-    mensagem_gerada += f"Motorista responsável: {motorista}.\n"
-
-    return mensagem_gerada
-
 def bozap():
     st.title("Bozap")
     st.write("Bem-vindo(a) à aba Bozap!")
-    st.write("Aqui você pode gerar uma mensagem para WhatsApp.")
-    
-    mensagem_gerada = gerar_mensagem_whatsapp()
+    st.write("Aqui você pode gerar uma mensagem para WhatsApp ou enviar um e-mail.")
 
-    st.markdown("**Texto gerado:**")
+    # Geração de mensagem para WhatsApp
+    mensagem_gerada = gerar_mensagem()
+
+    st.markdown("**Texto gerado para WhatsApp:**")
     st.text_area("", mensagem_gerada, height=200, max_chars=None, key=None)
 
     numero_whatsapp = st.text_input("Insira o número de WhatsApp do destinatário (inclua o DDI, ex.: +55):")
@@ -123,22 +106,38 @@ def bozap():
         link_whatsapp = f"https://wa.me/{numero_whatsapp}?text={mensagem_codificada}"
         st.markdown(f"**Link para enviar a mensagem:**")
         st.markdown(f"[{link_whatsapp}]({link_whatsapp})")
+
+    # Envio de e-mail
+    st.markdown("---")
+    st.write("Envie o texto acima como um e-mail:")
+    
+    destinatario_email = st.text_input("Insira o e-mail do destinatário:")
+    assunto_email = st.text_input("Insira o assunto do e-mail:")
+    corpo_email = st.text_area("Insira o corpo do e-mail:")
+
+    uploaded_file = st.file_uploader('Selecione um arquivo para anexar', type=['pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
+    if st.button("Enviar E-mail") and destinatario_email.strip() != '':
+        arquivo_anexo = uploaded_file if uploaded_file is not None else None
+        enviar_email(destinatario_email, assunto_email, corpo_email, arquivo_anexo)
+        st.success('E-mail enviado com sucesso!')
+
+# Função principal da aba "BotBlaze"
 def botBlaze():
-    st.title('BotBlaze')
-    # Conteúdo da aba "BotBlaze"
+    st.title("BotBlaze")
     st.write("Conteúdo da aba BotBlaze.")
 
+# Definindo o layout da página com a sidebar e as abas
 def main():
     st.sidebar.title('Menu')
-    opcoes = ['Botmail', 'Bozap', 'BotBlaze']
+    opcoes = ['Bozap', 'BotBlaze']
     aba_selecionada = st.sidebar.selectbox('Selecione a aba:', opcoes)
 
-    if aba_selecionada == 'Botmail':
-        botmail()
-    elif aba_selecionada == 'Bozap':
+    if aba_selecionada == 'Bozap':
         bozap()
     elif aba_selecionada == 'BotBlaze':
         botBlaze()
 
 if __name__ == '__main__':
     main()
+Com essas alterações, a aba "Bozap" agora possui a 
