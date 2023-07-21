@@ -11,7 +11,6 @@ import streamlit as st
 import concurrent.futures
 
 
-
 def enviar_email(destinatario, assunto, corpo, arquivo_anexo=None):
     # Configurações do servidor do Gmail
     smtp_server = 'smtp.gmail.com'
@@ -107,7 +106,6 @@ def gerar_mensagem_whatsapp():
 
     return mensagem_gerada
 
-# Função principal da aba "Bozap"
 def bozap():
     st.title("Bozap")
     st.write("Bem-vindo(a) à aba Bozap!")
@@ -120,12 +118,11 @@ def bozap():
 
     numero_whatsapp = st.text_input("Insira o número de WhatsApp do destinatário (inclua o DDI, ex.: +55):")
 
-    if st.button("Gerar Link para WhatsApp"):
+    if st.button("Gerar Link para WhatsApp") and mensagem_gerada:
         mensagem_codificada = quote(mensagem_gerada)
         link_whatsapp = f"https://wa.me/{numero_whatsapp}?text={mensagem_codificada}"
         st.markdown(f"**Link para enviar a mensagem:**")
         st.markdown(f"[{link_whatsapp}]({link_whatsapp})")
-
 def botBlaze():
     st.title('BotBlaze')
     # Conteúdo da aba "BotBlaze"
