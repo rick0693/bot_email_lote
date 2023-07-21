@@ -11,6 +11,23 @@ from email import encoders
 import streamlit as st
 import concurrent.futures
 
+def gerar_mensagem_whatsapp():
+    nome_empresa = "Fotus Energia Solar"
+
+    nota_fiscal = st.text_input("Número da Nota Fiscal:")
+    destinatario = st.text_input("Nome do destinatário:")
+    data_agendamento = st.text_input("Data do agendamento:")
+    pedido = st.text_input("Número do pedido:")
+    motorista = st.text_input("Nome do motorista:")
+
+    mensagem_gerada = f"Meu nome é Ricardo, falo da {nome_empresa}.\n"
+    mensagem_gerada += f"Estamos com uma entrega referente à NF {nota_fiscal} do destinatário {destinatario},\n"
+    mensagem_gerada += f"gostaria de agendar a entrega para o dia {data_agendamento}.\n"
+    mensagem_gerada += f"Detalhes do pedido: {pedido}.\n"
+    mensagem_gerada += f"Motorista responsável: {motorista}.\n"
+
+    return mensagem_gerada
+
 def enviar_email(destinatario, assunto, corpo, arquivo_anexo=None):
     # Configurações do servidor do Gmail
     smtp_server = 'smtp.gmail.com'
@@ -89,10 +106,22 @@ def botmail():
             st.warning('Insira um destinatário válido.')
 
 def bozap():
-    st.title('Bozap')
-    # Conteúdo da aba "Bozap"
-    st.write("Conteúdo da aba Bozap.")
+    st.title("Bozap")
+    st.write("Bem-vindo(a) à aba Bozap!")
+    st.write("Aqui você pode gerar uma mensagem para WhatsApp.")
+    
+    mensagem_gerada = gerar_mensagem_whatsapp()
 
+    st.markdown("**Texto gerado:**")
+    st.text_area("", mensagem_gerada, height=200, max_chars=None, key=None)
+
+    numero_whatsapp = st.text_input("Insira o número de WhatsApp do destinatário (inclua o DDI, ex.: +55):")
+
+    if st.button("Gerar Link para WhatsApp"):
+        mensagem_codificada = quote(mensagem_gerada)
+        link_whatsapp = f"https://wa.me/{numero_whatsapp}?text={mensagem_codificada}"
+        st.markdown(f"**Link para enviar a mensagem:**")
+        st.markdown(f"[{link_whatsapp}]({link_whatsapp})")ssssss
 def botBlaze():
     st.title('BotBlaze')
     # Conteúdo da aba "BotBlaze"
